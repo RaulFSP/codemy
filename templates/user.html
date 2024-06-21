@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {{name | list}}
-</body>
-</html>
+{%extends "base.html"%}
+
+{%block head%} 
+    <title>Página do Usuário</title>
+{%endblock%}
+
+{%block body%}
+<h1 class="text-center">User Form</h1>
+    <form action="{{url_for('user')}}" method="post" class="container">
+        <fieldset class="container shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
+            {{form.hidden_tag()}}
+
+        {{form.name.label(class="form-label")}}
+        {{form.name(class="form-control", placeholder="George...")}}
+        {{form.submit(value="Enviar", class="btn btn-primary")}}
+        </fieldset>
+        
+    </form>
+
+{%endblock%}
