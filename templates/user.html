@@ -7,19 +7,22 @@
 {%block body%}
 <h1 class="text-center">User Form</h1>
     <form action="{{url_for('user')}}" method="post" class="container">
-        <fieldset class="container shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
+        <fieldset class="shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
             {{form.hidden_tag()}}
 
         {{form.nome.label(class="form-label")}}
         {{form.nome(class="form-control", placeholder="George...")}}
         {{form.email.label(class="form-label")}}
         {{form.email(class="form-control", placeholder="geor3@mail.com")}}
-        {{form.submit(value="Enviar", class="btn btn-primary")}}
+        <div class="d-flex justify-content-end">
+            {{form.submit(value="Cadastrar", class="btn btn-outline-primary")}}
+        </div>
         </fieldset>
         
     </form>
-{%if users is not none%}
-    <table class="table table-striped shadow p-3 mb-5 bg-body-tertiary rounded">
+    
+{%if users%}
+    <table class="container table table-striped shadow p-3 mb-5 bg-body-tertiary rounded">
         <thead>
             <tr>
                 <th>
@@ -34,21 +37,31 @@
                 <th>
                     Data
                 </th>
+                <th>
+                    Status
+                </th>
             </tr>
         </thead>
         <tbody>
             {%for user in users%}
             <tr>
                 <td>{{user.id}}</td>
-                <td>{{user.nome}}</td>
+                <td><a href="{{url_for('alterar_usuario',id=user.id)}}">{{user.nome}}</a></td>
                 <td>{{user.email}}</td>
                 <td>{{user.data}}</td>
+                <!-- <td>{{user.status}}</td> -->
+                {%if user.status%}
+                    <td>Ativo</td>
+                {%else%}
+                    <td>Desativado</td>
+                {%endif%}
+
             </tr>
             {%endfor%}
         </tbody>
     </table>
 {%else%}
-    <p>Não Há usuários</p>
+    <h2 class="text-center">Não Há usuários</h2>
 {%endif%}
     
 {%endblock%}

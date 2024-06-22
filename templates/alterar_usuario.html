@@ -1,0 +1,25 @@
+{%extends "base.html"%}
+
+{%block head%} 
+    <title>Alterar Usuário</title>
+{%endblock%}
+
+{%block body%}
+<h1 class="text-center">Alter User</h1>
+<form action="{{url_for('alterar_usuario',id=user.id)}}" method="post" class="container">
+    <fieldset class="container shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
+        <a href="{{ url_for('user')}}" class="btn btn-outline-secondary" style="width: 150px;">Voltar</a>
+        {{form.hidden_tag()}}
+
+        {{form.nome.label(class="form-label")}}
+        {{form.nome(class="form-control", placeholder="George...", value=user.nome)}}
+        {{form.email.label(class="form-label")}}
+        {{form.email(class="form-control", placeholder="geor3@mail.com", value=user.email)}}
+        <div class="d-inline-flex justify-content-evenly">
+            <a href="{{ url_for('desativar_usuario', id=user.id)}}" class="btn btn-outline-danger align-self-center" style="width: 200px;">Desativar Usuário</a>
+            {{form.submit(value="Enviar", class="btn btn-outline-primary align-self-center", style="width: 200px;")}}
+        </div>
+    </fieldset>
+        
+    </form>    
+{%endblock%}
