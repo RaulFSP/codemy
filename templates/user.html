@@ -10,11 +10,45 @@
         <fieldset class="container shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
             {{form.hidden_tag()}}
 
-        {{form.name.label(class="form-label")}}
-        {{form.name(class="form-control", placeholder="George...")}}
+        {{form.nome.label(class="form-label")}}
+        {{form.nome(class="form-control", placeholder="George...")}}
+        {{form.email.label(class="form-label")}}
+        {{form.email(class="form-control", placeholder="geor3@mail.com")}}
         {{form.submit(value="Enviar", class="btn btn-primary")}}
         </fieldset>
         
     </form>
-
+{%if users is not none%}
+    <table class="table table-striped shadow p-3 mb-5 bg-body-tertiary rounded">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Data
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for user in users%}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.nome}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.data}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+{%else%}
+    <p>Não Há usuários</p>
+{%endif%}
+    
 {%endblock%}
