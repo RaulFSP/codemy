@@ -1,15 +1,19 @@
 {%extends "base.html"%}
 
-{%block head%} 
-    <title>Página Principal</title>
+{%block head%}
+
+<title>Página Principal</title>
 {%endblock%}
 
-{%block body%} 
-    
-    
-    
-    <p>página principal</p>
-
-    
+{%block body%}
+<h1 class="text-center">Chefes Destacados</h1>
+<hr>
+{% include "carrossel.html"%}
+<hr>
+<h1 class="text-center">Pratos Disponíveis</h1>
+<br>
+<div class="d-flex " style=" flex-wrap: wrap; justify-content: space-evenly;">
+    {% include "pratos.html"%}
+</div>
 
 {%endblock%}

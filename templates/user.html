@@ -1,67 +1,73 @@
 {%extends "base.html"%}
 
-{%block head%} 
-    <title>Página do Usuário</title>
+{%block head%}
+
+<title>Página do Usuário</title>
 {%endblock%}
 
 {%block body%}
 <h1 class="text-center">User Form</h1>
-    <form action="{{url_for('user')}}" method="post" class="container">
-        <fieldset class="shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
-            {{form.hidden_tag()}}
+<br>
+<form action="{{url_for('user')}}" method="post"
+    class="container shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
 
-        {{form.nome.label(class="form-label")}}
-        {{form.nome(class="form-control", placeholder="George...")}}
-        {{form.email.label(class="form-label")}}
-        {{form.email(class="form-control", placeholder="geor3@mail.com")}}
-        <div class="d-flex justify-content-end">
-            {{form.submit(value="Cadastrar", class="btn btn-outline-primary")}}
-        </div>
-        </fieldset>
-        
-    </form>
-    
+    {{form.hidden_tag()}}
+
+    {{form.nome.label(class="form-label")}}
+    {{form.nome(class="form-control", placeholder="George...")}}
+    {{form.email.label(class="form-label")}}
+    {{form.email(class="form-control", placeholder="geor3@mail.com")}}
+    {{form.color.label(class="form-label")}}
+    {{form.color(class="form-control", placeholder="green...")}}
+    {{form.password_hash.label(class="form-label")}}
+    {{form.password_hash(class="form-control")}}
+    {{form.password_hash2.label(class="form-label")}}
+    {{form.password_hash2(class="form-control")}}
+    <div class="d-flex justify-content-end">
+        {{form.submit(value="Cadastrar", class="btn btn-warning")}}
+    </div>
+
+
+</form>
+
 {%if users%}
-    <table class="container table table-striped shadow p-3 mb-5 bg-body-tertiary rounded">
-        <thead>
+
+<div class="table-responsive">
+    <table class="container table align-middle table-striped table-hover table-bordered" >
+        <thead style="text-align: center;">
             <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Nome
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Data
-                </th>
-                <th>
-                    Status
-                </th>
+                <th >ID</th>
+                <th >Nome</th>
+                <th >Email</th>
+                <th >Color</th>
+                <th >Data</th>
+                <th >Password</th>
+                <th >Status</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
             {%for user in users%}
             <tr>
-                <td>{{user.id}}</td>
-                <td><a href="{{url_for('alterar_usuario',id=user.id)}}">{{user.nome}}</a></td>
-                <td>{{user.email}}</td>
-                <td>{{user.data}}</td>
-                <!-- <td>{{user.status}}</td> -->
+                <td >{{user.id}}</td>
+                <td ><a href="{{url_for('alterar_usuario',id=user.id)}}">{{user.nome}}</a></td>
+                <td >{{user.email}}</td>
+                <td >{{user.color}}</td>
+                <td >{{user.data}}</td>
+                <td >{{user.password_hash}}</td>
                 {%if user.status%}
-                    <td>Ativo</td>
+                    <td >Ativo</td>
                 {%else%}
-                    <td>Desativado</td>
+                    <td >Desativado</td>
                 {%endif%}
 
             </tr>
             {%endfor%}
         </tbody>
     </table>
+</div>
+
 {%else%}
-    <h2 class="text-center">Não Há usuários</h2>
+<h2 class="text-center">Não Há usuários</h2>
 {%endif%}
-    
+
 {%endblock%}

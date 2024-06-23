@@ -1,0 +1,36 @@
+{%extends "base.html"%}
+
+{%block head%} 
+    <title>Testar Senha</title>
+{%endblock%}
+
+{%block body%}
+<h1 class="text-center">Login User</h1>
+<br>
+<form action="{{url_for('teste_senha')}}" method="post" class="container shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
+    
+        <a href="{{ url_for('user')}}" class="btn btn-warning" style="width: 150px;">Voltar</a>
+
+        {{form.hidden_tag()}}
+
+        {{form.email.label(class="form-label")}}
+        {{form.email(class="form-control")}}
+
+        {{form.password.label(class="form-label")}}
+        {{form.password(class="form-control")}}
+
+        <div class="d-inline-flex justify-content-evenly">
+            {{form.submit(value="Logar", class="btn btn-warning align-self-center", style="width: 200px;")}}
+        </div>
+    
+        
+    </form>  
+    {%if email%}  
+        <p>{{email}}</p>
+        <p>{{password}}</p>
+        <p>{{pw_check.nome}}</p>
+        <p>{{pw_check.email}}</p>
+        <p>{{pw_check.password_hash}}</p>
+        <p>{{passed}}</p>
+    {%endif%}
+{%endblock%}
