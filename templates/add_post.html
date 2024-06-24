@@ -1,0 +1,25 @@
+{%extends "base.html"%}
+
+{%block head%} 
+    <title>Testar Senha</title>
+{%endblock%}
+
+{%block body%}
+    <form action="{{url_for('add_post')}}" method="post">
+        {{form.hidden_tag()}}
+        <fieldset class="container shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-column mb-3" style="gap: 20px;">
+        <a href="{{ url_for('index')}}" class="btn btn-warning" style="width: 150px;">Voltar</a>
+        {{form.title.label}}
+        {{form.title}}
+        {{form.author.label}}
+        {{form.author}}
+        {{form.slug.label}}
+        {{form.slug}}
+        {{form.content.label}}
+        {{form.content(rows=10)}}
+        <div class="d-inline-flex justify-content-evenly">
+            {{form.submit(value="Postar", class="btn btn-warning align-self-center", style="width: 200px;")}}
+        </div>
+    </fieldset>
+    </form>
+{%endblock%}

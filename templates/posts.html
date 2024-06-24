@@ -1,0 +1,22 @@
+{%extends "base.html"%}
+
+{%block head%}
+<title>Listagem de Posts</title>
+{%endblock%}
+
+{%block body%}
+<div class="container d-flex flex-column-reverse gap-3">
+{%for post in posts%}
+<div class="card" style="min-width: 20rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{post.author}}</h6>
+        <p class="card-text">{{post.slug}}</p>
+        <p class="card-text">{{post.content}}</p>
+        <p class="card-text">{{post.date_posted}}</p>
+        <a href="{{url_for('vizualizar_postagem',id=post.id)}}" class="btn btn-warning">Acessar</a>
+    </div>
+</div>
+{%endfor%}
+</div>
+{%endblock%}

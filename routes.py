@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from app import app, db
-from forms import UserForm, PassowordForm
-from models import UserModel
+from forms import UserForm, PassowordForm, PostForm
+from models import UserModel, PostModel
 from werkzeug.security import generate_password_hash, check_password_hash
 #==============================================================
 
@@ -106,10 +106,33 @@ def teste_senha():
 
 #==============================================================
 
+@app.route('/add_post', methods=['POST','GET'])
+def add_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = PostModel(
+            title=form.title.data,
+            content=form.content.data,
+            author=form.author.data,
+            slug = form.slug.data
+        )
+        form = PostForm(formdata=None)
+        db.session.add(post)
+        db.session.commit()
+        flash('Postagem criada!')
+        return redirect(url_for('add_post'))
+    else:
+        return render_template('add_post.html',form=form)
 
+@app.route('/posts')
+def posts():
+    posts = PostModel.query.order_by(PostModel.id).all()
+    return render_template('posts.html',posts=posts)
 
-
-
+@app.route('/vizualizar_postagem/<int:id>')
+def vizualizar_postagem(id):
+    post = PostModel.query.get_or_404(id)
+    return render_template('postagem.html',post=post)
 
 
 

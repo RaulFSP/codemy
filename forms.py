@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, PasswordField, BooleanField, ValidationError
+from wtforms import SubmitField, StringField, PasswordField, BooleanField, ValidationError, TextAreaField
 from wtforms.validators import DataRequired, Length, EqualTo
+from wtforms.widgets import TextArea
 from datetime import datetime
 
 class UserForm(FlaskForm):
@@ -14,4 +15,11 @@ class UserForm(FlaskForm):
 class PassowordForm(FlaskForm):
     email = StringField(label="Enter your email",validators=[DataRequired()])
     password = PasswordField(label="Password", validators=[DataRequired()])
+    submit = SubmitField(label="Submit")
+
+class PostForm(FlaskForm):
+    title =  StringField(label="Title", validators=[DataRequired(),Length(min=3,max=255)])
+    content =TextAreaField(label="Content",validators=[DataRequired()], widget=TextArea())
+    author =StringField(label="Author", validators=[DataRequired(),Length(min=3,max=255)])
+    slug =StringField(label="Slug", validators=[DataRequired(),Length(min=3,max=255)])
     submit = SubmitField(label="Submit")

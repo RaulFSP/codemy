@@ -1,7 +1,7 @@
 from app import db
-from sqlalchemy import Integer, String, Date, Text, Boolean
+from sqlalchemy import Integer, String, Date, Text, Boolean, DateTime
 from sqlalchemy.orm import mapped_column
-from datetime import datetime
+from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -21,4 +21,12 @@ class UserModel(db.Model):
         self.password_hash = generate_password_hash(password)
     def verify_password(self, password):
         return check_password_hash(self.password_hash,password)
+    
+class PostModel(db.Model):
+    id = mapped_column(Integer, primary_key=True,autoincrement=True)
+    title = mapped_column(String(255))
+    content = mapped_column(Text)
+    author = mapped_column(String(255))
+    date_posted = mapped_column(DateTime, default=datetime.now(timezone.utc))
+    slug = mapped_column(String(255))
     
